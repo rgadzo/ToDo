@@ -1,6 +1,16 @@
 {% extends 'base.html' %}
 
 {% block tasks %}
-    <p>TEST</p>
+    {% for task in task_list %}
+        <div class="container mx-auto">
+            <div class="row">
+                <div class="card col-6 d-flex">
+                    <div class="card-body">
+                        <h5>{{ task }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
 {% endblock tasks %}
 
