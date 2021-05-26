@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
+from django.shortcuts import get_object_or_404
 
 
 from . import models
@@ -22,12 +23,13 @@ def task(request):
 
 
 def delete(request, task_id):
-    models.Task.objects.filter(id=task_id).delete()
+    task = get_object_or_404(models.Task, id=task_id)
+    task.delete()
     return HttpResponseRedirect(reverse('todoapp:home'))
 
 
 def rewrite(request, task_id):
-    task = models.Task.objects.get(id=task_id)
+    task = get_object_or_404(models.Task, id=task_id)
     return render(request, 'rewrite.html', context={
         'task': task,
     })
@@ -35,7 +37,7 @@ def rewrite(request, task_id):
 
 def rewrite_done(request, task_id):
     new_task_text = request.POST.get('new-name')
-    task = models.Task.objects.get(id=task_id)
+    task = get_object_or_404(models.Task, id=task_id)
     task.task_text = new_task_text
     task.save()
     return HttpResponseRedirect(reverse('todoapp:home'))
