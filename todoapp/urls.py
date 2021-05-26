@@ -5,4 +5,5 @@ app_name = "todoapp"
 urlpatterns = [
     path('new-task', views.task, name='task'),
     path('', views.home, name='home'),
+    path('delete/<int:task_id>', views.delete, name='delete'),
 ]
