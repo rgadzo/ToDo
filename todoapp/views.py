@@ -1,6 +1,10 @@
 from django.shortcuts import render
-from . import models
 from django.utils import timezone
+from django.http import HttpResponseRedirect
+from django.urls import reverse
+
+
+from . import models
 
 
 def home(request):
@@ -14,8 +18,4 @@ def home(request):
 def task(request):
     task = request.POST.get('task')
     models.Task.objects.create(task_text=task, task_time_added=timezone.now())
-    task_list = models.Task.objects.all()
-    context = {
-        'task_list': task_list,
-    }
-    return render(request, 'newtask.html', context)
+    return HttpResponseRedirect(reverse('todoapp:home'))
