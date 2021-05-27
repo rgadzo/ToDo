@@ -29,9 +29,10 @@ def delete(request, task_id):
 
 
 def rewrite(request, task_id):
-    task = get_object_or_404(models.Task, id=task_id)
+    tasks_list = models.Task.objects.all()
     return render(request, 'rewrite.html', context={
-        'task': task,
+        'task_id': task_id,
+        'tasks_list': tasks_list,
     })
 
 
