@@ -3,9 +3,22 @@ from django.utils import timezone
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.shortcuts import get_object_or_404
+from .forms import CreateUserForm
 
 
 from . import models
+
+
+def registerPage(request):
+    form = CreateUserForm()
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+    context = {
+        'form': form,
+    }
+    return render(request, 'register.html', context)
 
 
 def home(request):

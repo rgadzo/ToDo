@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="eng">
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </head>
+    <body class="body-style">
+        <div class="container">
+            <div class="row my-5">
+                <div class="card shadow-lg rounded col-lg-6 col-md-8 col-sm-12 mx-auto">
+                    <div class="card-header">
+                        <h1 class="text-center text-success">Sign Up</h1>
+                    </div>
+                    <div class="card-body">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                {{ form.username }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.email }}
+                            </div>
+                                <div class="mb-3">
+                                {{ form.password1 }}
+                            </div>
+                            <div class="mb-3">
+                                {{ form.password2 }}
+                            </div>
+                            
+                            <input type="submit" class="btn btn-success rounded" value="Sign Up" name="create-user"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script>
+        var forms_list = document.getElementsByTagName('input')
+        forms_list[1].placeholder = 'Username...';
+        forms_list[2].placeholder = 'Email...';
+        forms_list[3].placeholder = 'Password...';
+        forms_list[4].placeholder = 'Re-enter password...';
+
+        for(i = 1; i<=4; i++){
+            forms_list[i].classList.add("form-control")
+        }
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>
