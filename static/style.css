@@ -7,3 +7,8 @@
 .body-style {
     background: rgb(179, 177, 177);
 }
+
+.logout-btn{
+    text-decoration: none !important; 
+    color: white !important; 
+}

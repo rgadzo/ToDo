@@ -9,4 +9,6 @@ urlpatterns = [
     path('rewrite/<int:task_id>', views.rewrite, name='rewrite'),
     path('rewrite-done/<int:task_id>', views.rewrite_done, name='rewritedone'),
     path('register', views.registerPage, name='register'),
+    path('login', views.loginPage, name='login'),
+    path('logout', views.logoutPage, name='logout'),
 ]
