@@ -1,3 +1,5 @@
 *.vscode
 /staticfiles
 /ToDo/secret_key.txt
+/ToDo/mail_usr.txt
+/ToDo/mail_passwd.txt

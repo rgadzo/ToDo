@@ -27,9 +27,9 @@ with open('ToDo/secret_key.txt') as f:
     SECRET_KEY = f.read().strip()
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.35', ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -133,6 +133,19 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+# SMTP config
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+
+with open('ToDo/mail_usr.txt') as f:
+    EMAIL_HOST_USER = f.read().strip()
+
+with open('ToDo/mail_passwd.txt') as f:
+    EMAIL_HOST_PASSWORD = f.read().strip()
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

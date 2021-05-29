@@ -33,21 +33,17 @@
             <div class="row my-5">
                 <div class="card shadow-lg rounded col-lg-6 col-md-8 col-sm-12 mx-auto">
                     <div class="card-header">
-                        <h1 class="text-center text-success">Log In</h1>
+                        <h1 class="text-center text-success">Confirmation</h1>
                     </div>
                     <div class="card-body">
                         <div class="container">
                             <form action="" method="post">
                                 {% csrf_token %}
                                 <div class="mb-3">
-                                    <input type="text" name="uname" class="form-control" placeholder="Username..." />
+                                    <input type="text" name="code" class="form-control" placeholder="Confirmation code..." />
                                 </div>
-                                <div class="mb-3">
-                                    <input type="password" name="passwd" class="form-control" placeholder="Password..." />
-                                </div>
-                                <input type="submit" class="btn btn-success rounded" value="Log In" name="loginuser"/>
+                                <input type="submit" class="btn btn-outline-success rounded" value="Confirm" name="confirm"/>
                             </form>
-                            <p class="text-center">Don't have an account yet?  <a href="{% url 'todoapp:register' %}">Register</a></p>
                         </div>
                     </div>
                 </div>
