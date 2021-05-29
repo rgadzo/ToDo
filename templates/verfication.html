@@ -46,6 +46,13 @@
                             </form>
                         </div>
                     </div>
+                    <div class="card-footer">
+                        {% if "mail" not in mail_host %}
+                            <p class="text-center">We have sent confirmation code on your {{ mail_host }} mail, if it doesn't arrive in 5 minutes check your spam folder or <a href="{% url 'todoapp:resend' resend_id %}">request another</a></p>
+                        {% else %}
+                            <p class="text-center">We have sent confirmation code on your {{ mail_host }} account, if it doesn't arrive in 5 minutes check your spam folder <a href="{% url 'todoapp:resend' resend_id %}">request another</a></p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
         </div>

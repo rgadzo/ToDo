@@ -11,5 +11,6 @@ urlpatterns = [
     path('register', views.registerPage, name='register'),
     path('login', views.loginPage, name='login'),
     path('logout', views.logoutPage, name='logout'),
-    path('confirm', views.confirm, name='confirm'),
+    path('confirm/<int:confirm_id>', views.confirm, name='confirm'),
+    path('resend/<int:resend_id>', views.resend, name='resend'),
 ]
