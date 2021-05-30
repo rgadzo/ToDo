@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="eng">
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'style.css' %}"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    </head>
+    <body class="body-style">
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.level == DEFAULT_MESSAGE_LEVELS.WARNING %}
+                    <div class="container my-1">
+                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                {% else %}
+                    <div class="container my-1">
+                        <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                            {{ message }}
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        <div class="container">
+            <div class="row my-5">
+                <div class="card shadow-lg rounded col-lg-6 col-md-8 col-sm-12 mx-auto">
+                    <div class="card-header">
+                        <h1 class="text-center text-success">Reset Password</h1>
+                    </div>
+                    <div class="card-body">
+                        <div class="container">
+                            <form action="" method="post">
+                                {% csrf_token %}
+                                <div class="mb-3">
+                                    <input type="password" name="passwd1" class="form-control" placeholder="New password..." />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="password" name="passwd2" class="form-control" placeholder="Re-enter new password..." />
+                                </div>
+                                <input type="submit" class="btn btn-success rounded" value="Reset" name="loginuser"/>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-gtEjrD/SeCtmISkJkNUaaKMoLD0//ElJ19smozuHV6z3Iehds+3Ulb9Bn9Plx0x4" crossorigin="anonymous"></script>
+    </body>
+</html>

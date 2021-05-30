@@ -13,4 +13,5 @@ urlpatterns = [
     path('logout', views.logoutPage, name='logout'),
     path('confirm', views.confirm, name='confirm'),
     path('resend/<int:resend_id>', views.resend, name='resend'),
+    path('reset', views.resetPassword, name='passwdreset'),
 ]

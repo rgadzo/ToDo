@@ -12,3 +12,9 @@
     text-decoration: none !important; 
     color: white !important; 
 }
+
+.nav-styling:hover{
+    text-decoration: none !important;
+    color: white !important;
+    background-color: blue !important;
+}

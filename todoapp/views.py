@@ -11,6 +11,7 @@ from .forms import CreateUserForm
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.urls import reverse
+import string
 import random
 from django.conf import settings
 
@@ -100,6 +101,27 @@ def logoutPage(request):
     return redirect('todoapp:login')
 
 
+@login_required(login_url='todoapp:login')
+def resetPassword(request):
+    passwd1 = request.POST.get('passwd1')
+    passwd2 = request.POST.get('passwd2')
+    if request.method == 'POST':
+        if passwd1 == passwd2:
+            user_model = models.User.objects.get(id=request.user.id)
+            user_model.set_password(passwd1)
+            user_model.save()
+            logout(request)
+            messages.success(request, "Password changed successfully")
+            return redirect('todoapp:login')
+        else:
+            messages.warning(request, "Two passwords do not match")
+            return redirect('todoapp:passwdreset')
+    else:
+        pass
+
+    return render(request, 'reset.html')
+
+
 def loginPage(request):
     if request.user.is_authenticated:
         return redirect('todoapp:home')
@@ -172,21 +194,41 @@ def registerPage(request):
 @login_required(login_url='todoapp:login')
 def home(request):
     current_user = request.user
+    time = timezone.now()
     user_model = models.User.objects.get(id=current_user.id)
     task_list_load_on_home = user_model.task_set.all()
     context = {
-        'task_list_load_on_home': task_list_load_on_home
+        'task_list_load_on_home': task_list_load_on_home,
+        'time': time,
     }
     return render(request, 'base.html', context)
 
 
 @login_required(login_url='todoapp:login')
 def task(request):
+    alphabet_str = string.ascii_lowercase + string.ascii_uppercase
+    alphabet_list = list(alphabet_str)
+
     task = request.POST.get('task')
-    current_user = request.user
-    user_model = models.User.objects.get(id=current_user.id)
-    user_model.task_set.create(task_text=task, task_time_added=timezone.now())
-    return HttpResponseRedirect(reverse('todoapp:home'))
+
+    task_is_valid = True
+
+    for letter in alphabet_list:
+        if letter in task:
+            task_is_valid = True
+            break
+        else:
+            task_is_valid = False
+
+    if task_is_valid == False:
+        messages.warning(request, "You can't add empty task")
+        return redirect('todoapp:home')
+    else:
+        current_user = request.user
+        user_model = models.User.objects.get(id=current_user.id)
+        user_model.task_set.create(
+            task_text=task, task_time_added=timezone.now())
+        return redirect('todoapp:home')
 
 
 @login_required(login_url='todoapp:login')
