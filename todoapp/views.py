@@ -55,10 +55,9 @@ def resend(request, resend_id):
         return redirect('todoapp:confirm', confirm_id=confirm_id)
 
 
-def confirm(request, confirm_id):
-    sscid = request.session['confirm_id']
-    if str(confirm_id) == str(sscid):
-
+def confirm(request):
+    sscid = request.session['sscid']
+    if str(sscid):
         if request.user.is_authenticated:
             return redirect('todoapp:home')
         else:
@@ -155,9 +154,9 @@ def registerPage(request):
                         )
                     except BadHeaderError:
                         print('Bad header configuration, preventing header injection')
-                    confirm_id = random.randint(1000000, 3000000)
-                    request.session['confirm_id'] = confirm_id
-                    return redirect('todoapp:confirm', confirm_id=confirm_id)
+                    sscid = random.randint(1000000, 3000000)
+                    request.session['sscid'] = sscid
+                    return redirect('todoapp:confirm')
                 else:
                     messages.warning(
                         request, "User with same email already exist")
