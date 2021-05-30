@@ -76,6 +76,7 @@ def ForgotPasswordConfirmation(request):
     if request.user.is_authenticated:
         return redirect('todoapp:home')
     else:
+        mail_host = request.session['mail_host']
         request.session['resend_key'] = random.randint(1000000, 3000000)
         if request.session['reset_password_key']:
             if request.method == 'POST':
@@ -90,7 +91,9 @@ def ForgotPasswordConfirmation(request):
                     return redirect('todoapp:passwdconfirm')
             else:
 
-                return render(request, 'password_verfication.html')
+                return render(request, 'password_verfication.html', context={
+                    'mail_host': mail_host,
+                })
         else:
             raise Http404("Page not found")
 
@@ -147,7 +150,6 @@ def ForgotPasswordReset(request):
 
 def resend(request, resend_id):
     ssrid = request.session['resend_id']
-    confirm_id = request.session['confirm_id']
     if str(ssrid) == str(resend_id):
         confirmation_number = request.session['confirmation_code']
         uname = request.session['username']
@@ -166,9 +168,9 @@ def resend(request, resend_id):
             )
         except BadHeaderError:
             print('Headers are not configured properly')
-        return redirect('todoapp:confirm', confirm_id=confirm_id)
+        return redirect('todoapp:confirm')
     else:
-        return redirect('todoapp:confirm', confirm_id=confirm_id)
+        return redirect('todoapp:confirm')
 
 
 def confirm(request):

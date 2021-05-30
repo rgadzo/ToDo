@@ -29,7 +29,7 @@ with open('ToDo/secret_key.txt') as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.0.35', ]
 
 
 # Application definition
