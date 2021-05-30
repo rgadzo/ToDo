@@ -11,6 +11,7 @@ from .forms import CreateUserForm
 from django.core.mail import send_mail, BadHeaderError
 from django.template.loader import render_to_string
 from django.urls import reverse
+from datetime import date, datetime
 import string
 import random
 from django.conf import settings
@@ -194,12 +195,14 @@ def registerPage(request):
 @login_required(login_url='todoapp:login')
 def home(request):
     current_user = request.user
-    time = timezone.now()
     user_model = models.User.objects.get(id=current_user.id)
+
+    current_date = date.today().strftime("%B %d")
+
     task_list_load_on_home = user_model.task_set.all()
     context = {
         'task_list_load_on_home': task_list_load_on_home,
-        'time': time,
+        'current_date': current_date,
     }
     return render(request, 'base.html', context)
 
