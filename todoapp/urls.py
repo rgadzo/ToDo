@@ -14,4 +14,11 @@ urlpatterns = [
     path('confirm', views.confirm, name='confirm'),
     path('resend/<int:resend_id>', views.resend, name='resend'),
     path('reset', views.resetPassword, name='passwdreset'),
+    path('forgot-password', views.ForgotPassword, name='passwdforgot'),
+    path('forgot-password-confirmation',
+         views.ForgotPasswordConfirmation, name='passwdconfirm'),
+    path('forgot-password-reset', views.ForgotPasswordReset,
+         name='forgotpasswdreset'),
+    path('forgot-password-resend', views.ForgotPasswordResend,
+         name='forgotpasswdresend'),
 ]
